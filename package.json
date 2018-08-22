@@ -1,0 +1,32 @@
+{
+  "name": "doorio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "watch": "nodemon index.js",
+    "eslint": "eslint --init"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucasbarross/doorio.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lucasbarross/doorio/issues"
+  },
+  "homepage": "https://github.com/lucasbarross/doorio#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "hashmap": "^2.3.0",
+    "socket.io": "^2.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^5.4.0",
+    "eslint-config-google": "^0.9.1",
+    "nodemon": "^1.18.3"
+  }
+}
