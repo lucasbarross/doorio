@@ -7,7 +7,10 @@ body {
     margin: 0;
 }
 
-canvas {
+#root {
+    display: flex;
     width: 100%;
     height: 100%;
+    justify-content: center;
+    align-items: center;
 }

@@ -3,9 +3,17 @@
     <title>A Multiplayer Game</title>
     <link rel="stylesheet" href="/css/index.css">
     <script src="/socket.io/socket.io.js"></script>
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
   </head>
   <body>
-    <canvas id="canvas"></canvas>
+        <div id="root">
+            <canvas id="canvas"></canvas>
+        </div>
   </body>
+  <script src="/js/game/Game.js"></script>
+  <script src="/js/game/Input.js"></script>
   <script src="/js/client.js"></script>
 </html>
