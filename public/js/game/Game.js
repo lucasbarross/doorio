@@ -12,11 +12,12 @@ function Game(socket, canvas, draw) {
 };
 
 Game.create = function(socket, canvas) {
-    canvas.width = 600;
-    canvas.height = 400;
+    let draw;
+    canvas.width = 900;
+    canvas.height = 250;
     canvas.style.border = '1px solid black';
-    let context = canvas.getContext('2d');
-    let draw = Draw.create(context);
+    draw = Draw.create(canvas);
+    draw.map();
     return new Game(socket, canvas, draw);
 };
 
