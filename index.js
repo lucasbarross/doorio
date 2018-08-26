@@ -22,15 +22,35 @@ server.listen(5000, function() {
   console.log('Starting server on port 5000');
 });
 
+let colors = ['red', 'blue'];
+let colorSelect = 0;
+
 // Add the WebSocket handlers
 let game = Game.create();
 io.on('connection', function(socket) {
     socket.on('player-join', function() {
-        game.addNewPlayer(socket);
+        game.addNewPlayer(socket, colors[colorSelect]);
+        if (colorSelect == 0) colorSelect = 1;
+        else colorSelect = 0;
     });
 
-    socket.on('movement', function(data) {
+    socket.on('action', function(data) {
+        let player = game.players.get(socket.id);
+        if (player) {
+            player.updateByInput(data);
+        }
+    });
 
+    socket.on('disconnect', function() {
+        let player = game.players.get(socket.id);
+        if (player) {
+            if (player.color == 'red') {
+                colorSelect = 0;
+            } else {
+                colorSelect = 1;
+            }
+        }
+        game.removePlayer(socket.id);
     });
 });
 

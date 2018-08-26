@@ -51,17 +51,17 @@ Draw.prototype.drawPlayers = function(player, otherPlayers) {
     let ctx = this.canvas.getContext('2d');
     ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-    let map = this.map();
+    this.map();
 
     ctx.beginPath();
-    ctx.arc(map.spawn.red.x, map.spawn.red.y, 25, 0, 2*Math.PI);
-    ctx.fillStyle = player.color || 'red';
+    ctx.arc(player.x, player.y, 25, 0, 2*Math.PI);
+    ctx.fillStyle = player.color;
     ctx.fill();
 
     otherPlayers.forEach((otherPlayer) => {
         ctx.beginPath();
-        ctx.arc(map.spawn.blue.x, map.spawn.blue.y, 25, 0, 2*Math.PI);
-        ctx.fillStyle = player.color || 'blue';
+        ctx.arc(otherPlayer.x, otherPlayer.y, 25, 0, 2*Math.PI);
+        ctx.fillStyle = otherPlayer.color;
         ctx.fill();
     });
 };
