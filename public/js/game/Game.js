@@ -9,16 +9,16 @@ function Game(socket, canvas, draw) {
     this.socket = socket;
     this.canvas = canvas;
     this.draw = draw;
+    this.player = undefined;
+    this.otherPlayers = [];
 };
 
 Game.create = function(socket, canvas) {
-    let draw;
     canvas.width = 900;
     canvas.height = 250;
     canvas.style.border = '1px solid black';
-    draw = Draw.create(canvas);
+    let draw = Draw.create(canvas);
     draw.map();
-    this.draw = draw;
     return new Game(socket, canvas, draw);
 };
 
@@ -38,6 +38,16 @@ Game.prototype.animate = function() {
 };
 
 Game.prototype.updateDraw = function() {
+    if (this.player) {
+        this.socket.emit('action', {
+            up: Input.UP,
+            right: Input.RIGHT,
+            down: Input.DOWN,
+            left: Input.LEFT,
+        });
+
+        this.draw.drawPlayers(this.player, this.otherPlayers);
+    }
     this.animate();
 };
 

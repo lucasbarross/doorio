@@ -18,6 +18,7 @@ Draw.prototype.map = function() {
     let baseWidth = (this.canvas.width/2) - (squareWidth/2) - squareCount * 40;
 
     canvas.fillStyle = '#d6d6d6';
+
     for (let i = 0; i < squareCount; i++) {
         canvas.fillRect(baseWidth + i*100, 20, squareWidth, squareWidth);
     }
@@ -31,4 +32,36 @@ Draw.prototype.map = function() {
     for (let i = 0; i < squareCount; i++) {
         canvas.fillRect(baseWidth + i * 100, 145, squareWidth, squareWidth);
     }
+
+    return {
+        spawn: {
+            blue: {
+                x: baseWidth + squareWidth/2,
+                y: 20 + squareWidth/2,
+            },
+            red: {
+                x: baseWidth + squareWidth/2,
+                y: 145 + squareWidth/2,
+            },
+        },
+    };
+};
+
+Draw.prototype.drawPlayers = function(player, otherPlayers) {
+    let ctx = this.canvas.getContext('2d');
+    ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+    let map = this.map();
+
+    ctx.beginPath();
+    ctx.arc(map.spawn.red.x, map.spawn.red.y, 25, 0, 2*Math.PI);
+    ctx.fillStyle = player.color || 'red';
+    ctx.fill();
+
+    otherPlayers.forEach((otherPlayer) => {
+        ctx.beginPath();
+        ctx.arc(map.spawn.blue.x, map.spawn.blue.y, 25, 0, 2*Math.PI);
+        ctx.fillStyle = player.color || 'blue';
+        ctx.fill();
+    });
 };
