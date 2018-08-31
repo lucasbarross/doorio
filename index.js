@@ -36,8 +36,9 @@ io.on('connection', function(socket) {
     socket.on('action', function(data) {
         let game = lobby.searchRunningGame(socket.id);
         if (game) {
-            let player = game.players.get(socket.id);
-            if (player) player.updateByInput(data);
+            let players = game.players;
+            let player = players.get(socket.id);
+            if (player) player.updateByInput(data, players);
         }
     });
 
