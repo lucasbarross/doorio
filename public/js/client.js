@@ -1,9 +1,11 @@
 $(document).ready(() => {
     let socket = io();
+    
     let canvas = document.getElementById('canvas');
+    canvas.width = canvas.height = 600
 
-    Input.applyEventHandlers();
+    document.addEventListener('keydown', (e) => socket.emit('keydown', e.keycode));
 
-    let game = Game.create(socket, canvas);
+    let game = Game.create(socket);
     game.init();
 });

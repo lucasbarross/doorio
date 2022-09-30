@@ -4,45 +4,50 @@
  * @param {SocketIO} socket
  * @param {Canvas} canvas
  */
-function Draw(socket) {
-    this.socket = socket;
+function Draw() {
+    this.canvas = document.getElementById('canvas');
 };
 
-Draw.create = function(socket) {
-    return new Draw(socket);
+Draw.create = function() {
+    return new Draw();
 };
 
-Draw.prototype.map = function(canvas, stage) {
-    canvas = canvas.getContext('2d');
+Draw.prototype.draw = function(gameState) {
+    this.drawMap(gameState.stage)
+    this.drawPlayers(gameState.players)
+}
+
+Draw.prototype.drawMap = function(mapState) {
+    const canvas = this.canvas.getContext('2d');
 
     canvas.fillStyle = '#d6d6d6';
 
-    for (let i = 0; i < stage.squareCount; i++) {
-        let square = stage.squaresUp[i];
-        canvas.fillRect(square.x, square.y, stage.squareWidth, stage.squareWidth);
+    for (let i = 0; i < mapState.squareCount; i++) {
+        let square = mapState.squaresUp[i];
+        canvas.fillRect(square.x, square.y, mapState.squareWidth, mapState.squareWidth);
     }
 
     canvas.fillStyle = '#351a00';
-    for (let i = 0; i < stage.squareCount; i++) {
-        let door = stage.doors[i];
-        canvas.fillRect(door.x, door.y, stage.squareWidth, door.h);
+    for (let i = 0; i < mapState.squareCount; i++) {
+        let door = mapState.doors[i];
+        canvas.fillRect(door.x, door.y, mapState.squareWidth, door.h);
     }
 
     canvas.fillStyle = '#d6d6d6';
-    for (let i = 0; i < stage.squareCount; i++) {
-        let square = stage.squaresDown[i];
-        canvas.fillRect(square.x, square.y, stage.squareWidth, stage.squareWidth);
+    for (let i = 0; i < mapState.squareCount; i++) {
+        let square = mapState.squaresDown[i];
+        canvas.fillRect(square.x, square.y, mapState.squareWidth, mapState.squareWidth);
     }
 
     return {
         spawn: {
             blue: {
-                x: stage.baseWidth + stage.squareWidth/2,
-                y: 20 + stage.squareWidth/2,
+                x: mapState.baseWidth + mapState.squareWidth/2,
+                y: 20 + mapState.squareWidth/2,
             },
             red: {
-                x: stage.baseWidth + stage.squareWidth/2,
-                y: 145 + stage.squareWidth/2,
+                x: mapState.baseWidth + mapState.squareWidth/2,
+                y: 145 + mapState.squareWidth/2,
             },
         },
     };
